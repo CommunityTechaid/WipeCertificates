@@ -136,9 +136,9 @@ It did a thing at %s
 "$errorTable" \
 "$datetime"
 
-pandoc -f markdown -s -o example.pdf <<< "$report"
+# pandoc -f markdown -s -o example.pdf <<< "$report"
+pandoc -f markdown -H CTA.tex -s -o example.pdf <<< "$report"
 # pandoc -f markdown --template CTATemplate.latex -s -o test.pdf <<< "$report"
-# pandoc -f markdown -H test.tex -s -o test.pdf <<< "$report"
 # pandoc -f markdown --template CTATemplate.latex -s -o test.tex <<< "$report"
 }
 
