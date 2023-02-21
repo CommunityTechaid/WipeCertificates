@@ -1,0 +1,80 @@
+[2023/01/24 13:35:06]  notice: Found /dev/sda,  ATA, WDC WD3200LPVX-6, 320 GB, S/N=WD-WXC1A14S2591
+[2023/01/24 13:35:07]  notice: Found /dev/nvme0n1, NVME, BC501 NVMe SK hynix 256GB, 256 GB, S/N=NS8BN06381120BD03
+[2023/01/24 13:35:07]    info: Automatically enumerated 2 devices.
+[2023/01/24 13:35:07]  notice: bios-version = 2.5.0
+[2023/01/24 13:35:07]  notice: bios-release-date = 07/29/2019
+[2023/01/24 13:35:07]  notice: system-manufacturer = Dell Inc.
+[2023/01/24 13:35:07]  notice: system-product-name = Vostro 5581
+[2023/01/24 13:35:07]  notice: system-version = Not Specified
+[2023/01/24 13:35:07]  notice: system-serial-number = 3FBJ6P2
+[2023/01/24 13:35:07]  notice: system-uuid = 4c4c4544-0046-4210-804a-b3c04f365032
+[2023/01/24 13:35:07]  notice: baseboard-manufacturer = Dell Inc.
+[2023/01/24 13:35:07]  notice: baseboard-product-name = 0TPGK9
+[2023/01/24 13:35:07]  notice: baseboard-version = A00
+[2023/01/24 13:35:07]  notice: baseboard-serial-number = /3FBJ6P2/CNWSC0092F0002/
+[2023/01/24 13:35:07]  notice: baseboard-asset-tag = Not Specified
+[2023/01/24 13:35:07]  notice: chassis-manufacturer = Dell Inc.
+[2023/01/24 13:35:07]  notice: chassis-type = Notebook
+[2023/01/24 13:35:07]  notice: chassis-version = Not Specified
+[2023/01/24 13:35:07]  notice: chassis-serial-number = 3FBJ6P2
+[2023/01/24 13:35:07]  notice: chassis-asset-tag = Not Specified
+[2023/01/24 13:35:07]  notice: processor-family = Core i7
+[2023/01/24 13:35:07]  notice: processor-manufacturer = Intel(R) Corporation
+[2023/01/24 13:35:07]  notice: processor-version = Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz
+[2023/01/24 13:35:07]  notice: processor-frequency = 1800 MHz
+[2023/01/24 13:35:07]  notice: Opened entropy source '/dev/urandom'.
+[2023/01/24 13:35:07]  notice: hwmon: Module drivetemp loaded, drive temperatures available
+[2023/01/24 13:35:07]  notice: hwmon: sda has temperature monitoring
+[2023/01/24 13:35:07]  notice: hwmon: nvme0n1 has temperature monitoring
+[2023/01/24 13:35:32]  notice: Program options are set as follows...
+[2023/01/24 13:35:32]  notice:   autonuke = 0 (off)
+[2023/01/24 13:35:32]  notice:   autopoweroff = 0 (off)
+[2023/01/24 13:35:32]  notice:   do not perform a final blank pass
+[2023/01/24 13:35:32]  notice:   do not wait for a key before exiting
+[2023/01/24 13:35:32]  notice:   banner   = ShredOS v2021.08.2_22_x86-64_0.32.023
+[2023/01/24 13:35:32]  notice:   prng     = Isaac64
+[2023/01/24 13:35:32]  notice:   method   = Fill With Zeros
+[2023/01/24 13:35:32]  notice:   quiet    = 0
+[2023/01/24 13:35:32]  notice:   rounds   = 1
+[2023/01/24 13:35:32]  notice:   sync     = 100000
+[2023/01/24 13:35:32]  notice:   verify   = 1 (last pass)
+[2023/01/24 13:35:32]  notice: /dev/sda has serial number WD-WXC1A14S2591
+[2023/01/24 13:35:32]  notice: /dev/sda, sect/blk/dev 512/4096/320072933376
+[2023/01/24 13:35:32]  notice: /dev/nvme0n1 has serial number NS8BN06381120BD03
+[2023/01/24 13:35:32]  notice: /dev/nvme0n1, sect/blk/dev 512/4096/256060514304
+[2023/01/24 13:35:32]  notice: Invoking method 'Fill With Zeros' on /dev/sda
+[2023/01/24 13:35:32]  notice: Starting round 1 of 1 on /dev/sda
+[2023/01/24 13:35:32]  notice: Invoking method 'Fill With Zeros' on /dev/nvme0n1
+[2023/01/24 13:35:32]  notice: Starting round 1 of 1 on /dev/nvme0n1
+[2023/01/24 13:35:32]  notice: Starting pass 1/1, round 1/1, on /dev/nvme0n1
+[2023/01/24 13:35:32]  notice: Starting pass 1/1, round 1/1, on /dev/sda
+[2023/01/24 13:50:29]  notice: 256060514304 bytes written to /dev/nvme0n1
+[2023/01/24 13:50:29]  notice: Verifying pass 1 of 1, round 1 of 1, on /dev/nvme0n1
+[2023/01/24 13:56:09]  notice: 256060514304 bytes read from /dev/nvme0n1
+[2023/01/24 13:56:09]  notice: Verified pass 1 of 1, round 1 of 1, on '/dev/nvme0n1'.
+[2023/01/24 13:56:09]  notice: Finished pass 1/1, round 1/1, on /dev/nvme0n1
+[2023/01/24 13:56:09]  notice: Finished final round 1 of 1 on /dev/nvme0n1
+[2023/01/24 14:43:16]  notice: 320072933376 bytes written to /dev/sda
+[2023/01/24 14:43:16]  notice: Verifying pass 1 of 1, round 1 of 1, on /dev/sda
+[2023/01/24 15:48:41]  notice: 320072933376 bytes read from /dev/sda
+[2023/01/24 15:48:41]  notice: Verified pass 1 of 1, round 1 of 1, on '/dev/sda'.
+[2023/01/24 15:48:41]  notice: Finished pass 1/1, round 1/1, on /dev/sda
+[2023/01/24 15:48:41]  notice: Finished final round 1 of 1 on /dev/sda
+
+******************************** Error Summary *********************************
+!   Device | Pass Errors | Verifications Errors | Fdatasync I\O Errors
+--------------------------------------------------------------------------------
+       sda |           0 |                    0 |                    0
+   nvme0n1 |           0 |                    0 |                    0
+********************************************************************************
+
+********************************* Drive Status *********************************
+!   Device | Status | Thru-put | HH:MM:SS | Model/Serial Number
+--------------------------------------------------------------------------------
+       sda | Erased |  80 MB/s | 02:13:09 | WDC WD3200LPVX-6/WD-WXC1A14S2591
+   nvme0n1 | Erased | 414 MB/s | 02:20:37 | BC501 NVMe SK hyn/NS8BN06381120BD03
+--------------------------------------------------------------------------------
+[2023/01/24 15:48:44] Total Throughput 494 MB/s, Fill With Zeros, 1R+NB+VL
+********************************************************************************
+
+[2023/01/24 15:48:44]    info: Nwipe successfully completed. See summary table for details.
