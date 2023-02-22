@@ -97,8 +97,6 @@ parseLog() {
 %% Device: %s
 %% Report Generated: %s
 
-<img src='/CTALogo.png' alt='CTA Logo' style='display:block; margin-left:auto; margin-right:auto; width:50%%;'>
-
 # CTA Disk Wiping
 Blah blah
 
@@ -136,13 +134,8 @@ It did a thing at %s
 "$errorTable" \
 "$datetime"
 
-# pandoc -f markdown -s -o example.pdf <<< "$report"
-pandoc -f markdown -H CTA.tex -s -o example.pdf <<< "$report"
-# pandoc -f markdown --template CTATemplate.latex -s -o test.pdf <<< "$report"
-# pandoc -f markdown --template CTATemplate.latex -s -o test.tex <<< "$report"
+pandoc -f markdown -H CTA.tex -s -o CTAWipeReport-"$deviceID".pdf <<< "$report"
+
 }
 
 parseLog "$1"
-#       
-# generateCert(deviceID, deviceDetails, erasureSummary)
-#     return certPDF
