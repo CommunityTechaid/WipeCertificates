@@ -40,9 +40,9 @@ parseLog() {
 
     deviceID=$(grep -Po '(?<=_)([[:digit:]]{4})(?=.log)' <<< "$fileName")
 
-    reportdate=$(date +%d/%m/%y)
-
-    datetime=$(grep completed "$fileName" | cut -d \] -f 1 | tr -d \[)
+    # head to only get first if multiple disks present
+    wipeStart=$(grep "Starting round 1 of 1" "$fileName" | head -n 1 | cut -d \] -f 1 | tr -d \[)
+    # datetime=$(grep completed "$fileName" | cut -d \] -f 1 | tr -d \[)
 
     # Gather Device information
     # grep to find line, cut to split on = and awk to trim whitespace
@@ -75,6 +75,11 @@ parseLog() {
     erasureTable=$(awk '{print"| "$0" |"}' <<< "$rawErasureTable")
     # Remove superfluous !
     erasureTable=${erasureTable//!}
+    # Make erased green
+    erasureTable=$(sed 's/Erased/\\textbf{\\textcolor{green}{Erased}}/' <<< "$erasureTable")
+    # Make erased red
+    erasureTable=$(sed 's/-FAILED/\\textbf{\\textcolor{red}{FAILED}}/' <<< "$erasureTable")
+
     # Fix underline (couldn't come up with more elegant solution)
     erasureTable=$(sed \
         's/| -------------------------------------------------------------------------------- |/|-----------|--------|----------|----------|---------------------|/g' <<< "$erasureTable")
@@ -91,14 +96,29 @@ parseLog() {
     errorTable=$(sed \
         's/| -------------------------------------------------------------------------------- |/|-----------|-------------|----------------------|---------------------|/g' <<< "$errorTable")
 
+    # Parse last line for ultimate outcome
+    lastLine=$(tail -n 1 "$fileName")
+    wipeEnd=$(cut -d \] -f 1 <<< "$lastLine" | tr -d \[)
+
+    if [[ $lastLine == *"Nwipe successful"* ]]; then
+        cert="We certify the drives were wiped and data erased successfully."
+    elif [[ $lastLine == *"Storage devices not found"* ]]; then
+        cert="Storage devices not found."
+    elif [[ $lastLine == *"Nwipe was aborted"* ]]; then
+        cert="The drive wipe was aborted so we cannot certify the data was erased."
+    else cert="The drive wipe failed so we cannot certify the data was erased."
+    fi
+
 
     printf -v "report" \
-"%% CTA Disk Wiping Report
-%% Device: %s
-%% Report Generated: %s
+"# CTA Disk Wiping
+**CTA Donation ID**: %s
 
-# CTA Disk Wiping
-Blah blah
+**Erasure standard**: HMG Infosec Baseline Standard 5
+
+**Wipe started**: %s
+
+**Wipe ended**: %s
 
 ## Device Info[^1]
 [^1]: These are the details of the devices used to wipe the disks. In situations where a computer is unable to power on these will differ to the machine donated.
@@ -122,17 +142,18 @@ Blah blah
 %s
 
 # Cert
-It did a thing at %s
+%s
 " \
 "$deviceID" \
-"$reportdate" \
+"$wipeStart" \
+"$wipeEnd" \
 "$manufacturer" \
 "$product" \
 "$serialNumber" \
 "$diskTable" \
 "$erasureTable" \
 "$errorTable" \
-"$datetime"
+"$cert" 
 
 pandoc -f markdown -H CTA.tex -s -o CTAWipeReport-"$deviceID".pdf <<< "$report"
 

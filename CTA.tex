@@ -1,11 +1,28 @@
 \usepackage[a4paper,
             left=1in,
             right=1in,
-            top=1in,
+            top=.5in,
             bottom=1in,
             footskip=.25in,
+            includeheadfoot,
             headheight=1in]{geometry}
 
+\usepackage{xcolor}
+\definecolor{blue}{HTML}{002590} % Set blue to Techaid blue
+
 \usepackage{graphicx}
-\usepackage[tt]{titlepic}
-\titlepic{\includegraphics[width=3in]{CTALogo.png}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% \fancyhead[L]{\textcolor{blue}{Data Erasure Report}}
+\fancyhead[L]{\section{Data Erasure Report}
+\today
+}
+\fancyhead[R]{\includegraphics[height=.75in]{CTALogo.png}}
+\fancyfoot[C]{donations@communitytechaid.org.uk}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{sectsty}
+\sectionfont{\color{blue}} % sets section colour to blue
+\subsectionfont{\color{blue}} % sets section colour to blue
