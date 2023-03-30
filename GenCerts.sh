@@ -1,7 +1,12 @@
 #!/usr/bin/bash
-# options: 
+# Future options: 
 #   -date: gen certs for all logs on a date
 #   -device: gen cert for particular device id
+#
+# Requirements:
+#   pandoc
+#   texlive-latex-recommended
+#   texlive-latex-extra
 #
 # vars:
 #   logFileLocation
@@ -28,17 +33,35 @@
 #
 # functions
 #    # findLogsByDate(date)
-#    #     return files
+#    #     return listOfFiles
 #
 #    # findLogsByID(ID)
-#    #     return files
+#    #     return listOfFiles
 #
+#    # checkForProcessedList()
+#    #     return listOfAlreadyProcessed
+
+
+#    # parselog(filename)
+#    #     return CertFile
+#
+
+# logFilesLocation='/srv/netboot/log/shredos'
+logFilesLocation='.'
+outputFilesLocation='.'
+
+# Make sure output dir exists
+# mkdir -p "$outputFilesLocation"
+
+checkForExistingCerts() {
+    readarray -t existingCertIDs < <(ls $outputFilesLocation | grep -Po '(?<=log_)([[:digit:]]{4})(?=_[[:digit:]]{8}-[[:digit:]]{6}.txt)')
+}
 
 parseLog() {
     #take first arg as filename
     fileName="$1"
 
-    deviceID=$(grep -Po '(?<=_)([[:digit:]]{4})(?=.log)' <<< "$fileName")
+    deviceID=$(grep -Po '(?<=_)([[:digit:]]{4})(?=_)' <<< "$fileName")
 
     # head to only get first if multiple disks present
     wipeStart=$(grep "Starting round 1 of 1" "$fileName" | head -n 1 | cut -d \] -f 1 | tr -d \[)
@@ -56,7 +79,7 @@ parseLog() {
 
     # Format disks into a markdown table
     printf -v "diskTable" "%s" "\
-| Device | Connection | Model | Capacity | Serial Number |
+| **Device** | **Connection** | **Model** | **Capacity** | **Serial Number** |
 |--------|------------|-------|----------|---------------|"
 
     for disk in "${disks[@]}"; do
@@ -87,7 +110,8 @@ parseLog() {
 
     # Grab Error summary
     # rawErrorTable=$(grep -Po "(?s)(?<=Error Summary \*{33}\n)(!.*?)(?:\n[*])")
-    rawErrorTable=$(awk '/Error Summary/{flag=1;next}/\*{80}/{flag=0}flag' "$fileName")
+    # rawErrorTable=$(awk '/Error Summary/{flag=1;next}/\*{80}/{flag=0}flag' "$fileName")
+    rawErrorTable=$(awk '/Error Summary/{flag=1;next}/Drive Status/{flag=0}flag' "$fileName" | head -n -2)
     # Add pre / post |
     errorTable=$(awk '{print"| "$0" |"}' <<< "$rawErrorTable")
     # Remove superfluous !
@@ -109,6 +133,12 @@ parseLog() {
     else cert="The drive wipe failed so we cannot certify the data was erased."
     fi
 
+    printf '%s\n' "$erasureTable"
+
+    testTable=$(awk 'BEGIN{FS="\|"} FNR == 1 {print "| **"$2"** | **"$3"** | **"$4"** | **"$5"** | **"$6"** |"}' <<< "$erasureTable")
+    printf '%s\n' "$testTable"
+
+    printf '%s\n' "$errorTable"
 
     printf -v "report" \
 "# CTA Disk Wiping
@@ -155,8 +185,9 @@ parseLog() {
 "$errorTable" \
 "$cert" 
 
-pandoc -f markdown -H CTA.tex -s -o CTAWipeReport-"$deviceID".pdf <<< "$report"
-
+pandoc -f markdown -H CTA.tex -s -o "$outputFilesLocation"/CTAWipeReport-"$deviceID".pdf <<< "$report"
 }
 
+
+### Main
 parseLog "$1"
