@@ -105,7 +105,7 @@ while True:
                 time.sleep(1)
                 for dev in devices:
                     # Generate certs
-                    os.system("./GenCerts.sh "+input_folder+dev+" "+output_folder)
+                    os.system("./GenCerts.sh "+os.path.join(input_folder, dev)+" "+output_folder)
                     d.gauge_update(increment)
                 d.gauge_update(100, "Done")
                 time.sleep(1)

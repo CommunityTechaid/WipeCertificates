@@ -16,6 +16,13 @@ parseLog() {
     #take second arg as output location
     outputFilesLocation="$2"
 
+    # Check to see if last character is / and fix to avoid path issues
+    lastChar="${outputFilesLocation: -1}"
+    if [[ "$lastChar" != "/" ]]
+    then
+        outputFilesLocation="$outputFilesLocation"/
+    fi
+
     deviceID=$(grep -Po '(?<=_)([[:digit:]]{4})(?=_)' <<< "$fileName")
 
     # head to only get first if multiple disks present
