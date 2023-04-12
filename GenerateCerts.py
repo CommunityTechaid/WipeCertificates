@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import locale
 import sys
 import time
@@ -133,5 +133,3 @@ while True:
 # }
 
 # Fucntion to find log file from ID
-
-
