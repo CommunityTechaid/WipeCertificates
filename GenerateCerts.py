@@ -7,8 +7,9 @@ import os.path
 from dialog import Dialog
 
 log_file_prefix = "nwipe_log_"
-output_folder = os.environ['HOME']
 input_folder = "/srv/netboot/log/shredos/"
+output_folder = os.environ['HOME']
+output_prefix = "CTAWipeReport-"
 
 locale.setlocale(locale.LC_ALL, '')
 
@@ -77,7 +78,7 @@ while True:
                         time.sleep(1)
                         for m in matches:
                             # Generate certs
-                            os.system("./GenCerts.sh "+input_folder+m+" "+output_folder)
+                            os.system("./GenCerts.sh "+os.join(input_folder, m)+" "+output_folder)
                         d.gauge_update(100, "Done")
                         time.sleep(1)
                         d.gauge_stop
