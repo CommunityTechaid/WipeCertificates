@@ -1,65 +1,20 @@
 #!/usr/bin/bash
-# Future options: 
-#   -date: gen certs for all logs on a date
-#   -device: gen cert for particular device id
+# Script to generate Cert
+# Extra functionality moved to .py wrapper.
+# Eventually should move all to the .py
 #
 # Requirements:
 #   pandoc
 #   texlive-latex-recommended
 #   texlive-latex-extra
 #
-# vars:
-#   logFileLocation
-#   certTemplateLocation
-#   certFileNameTemplate
-#
-# # parse args
-# if date
-#     logs = findLogsByDate(date)
-#     certs = []
-#     for log in logs:
-#         logInfo = parseLog(log)
-#         logCert = generateCert(logInfo)
-#         certs += logCert
-#     "We've generated:"
-#     for cert in certs:
-#         "certFileName"
-#
-# elfi device
-#     dodododod
-#
-# else
-#     exit with info
-#
-# functions
-#    # findLogsByDate(date)
-#    #     return listOfFiles
-#
-#    # findLogsByID(ID)
-#    #     return listOfFiles
-#
-#    # checkForProcessedList()
-#    #     return listOfAlreadyProcessed
-
-
-#    # parselog(filename)
-#    #     return CertFile
-#
-
-# logFilesLocation='/srv/netboot/log/shredos'
-logFilesLocation='.'
-outputFilesLocation='.'
-
-# Make sure output dir exists
-# mkdir -p "$outputFilesLocation"
-
-checkForExistingCerts() {
-    readarray -t existingCertIDs < <(ls $outputFilesLocation | grep -Po '(?<=log_)([[:digit:]]{4})(?=_[[:digit:]]{8}-[[:digit:]]{6}.txt)')
-}
 
 parseLog() {
     #take first arg as filename
     fileName="$1"
+
+    #take second arg as output location
+    outputFilesLocation="$2"
 
     deviceID=$(grep -Po '(?<=_)([[:digit:]]{4})(?=_)' <<< "$fileName")
 
@@ -133,12 +88,12 @@ parseLog() {
     else cert="The drive wipe failed so we cannot certify the data was erased."
     fi
 
-    printf '%s\n' "$erasureTable"
+    # printf '%s\n' "$erasureTable"
 
-    testTable=$(awk 'BEGIN{FS="\|"} FNR == 1 {print "| **"$2"** | **"$3"** | **"$4"** | **"$5"** | **"$6"** |"}' <<< "$erasureTable")
-    printf '%s\n' "$testTable"
+    # testTable=$(awk 'BEGIN{FS="\|"} FNR == 1 {print "| **"$2"** | **"$3"** | **"$4"** | **"$5"** | **"$6"** |"}' <<< "$erasureTable")
+    # printf '%s\n' "$testTable"
 
-    printf '%s\n' "$errorTable"
+    # printf '%s\n' "$errorTable"
 
     printf -v "report" \
 "# CTA Disk Wiping
@@ -185,9 +140,7 @@ parseLog() {
 "$errorTable" \
 "$cert" 
 
-pandoc -f markdown -H CTA.tex -s -o "$outputFilesLocation"/CTAWipeReport-"$deviceID".pdf <<< "$report"
+pandoc -f markdown -H CTA.tex -s -o "$outputFilesLocation"CTAWipeReport-"$deviceID".pdf <<< "$report"
 }
 
-
-### Main
 parseLog "$1"
