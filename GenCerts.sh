@@ -143,4 +143,4 @@ parseLog() {
 pandoc -f markdown -H CTA.tex -s -o "$outputFilesLocation"CTAWipeReport-"$deviceID".pdf <<< "$report"
 }
 
-parseLog "$1"
+parseLog "$1" "$2"
