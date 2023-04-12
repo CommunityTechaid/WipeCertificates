@@ -1,0 +1,7 @@
+README
+
+Script(s) to generate CTA Disk Wipe Certificates
+
+# Requirement
+dialog
+pythondialog
