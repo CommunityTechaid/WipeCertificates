@@ -61,7 +61,7 @@ while True:
             code, device_id = d.inputbox("Enter device ID:")
             if code == d.OK:
                 if device_id.isnumeric():
-                    d.infobox("You entered: "+str(device_id))
+                    # d.infobox("You entered: "+str(device_id))
                     time.sleep(1)
                     list_of_files = list_log_files(input_folder)
                     device_id_string = "_"+device_id+"_"
@@ -86,7 +86,7 @@ while True:
 
         # Batch generate
         elif tag == "(2)":
-            d.msgbox("You selected batch generate certs")
+            # d.msgbox("You selected batch generate certs")
             device_choices = []
             list_of_files = list_log_files(input_folder)
             for file in list_of_files:
