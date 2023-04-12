@@ -78,7 +78,7 @@ while True:
                         time.sleep(1)
                         for m in matches:
                             # Generate certs
-                            os.system("./GenCerts.sh "+input_folder+dev+" "+output_folder)
+                            os.system("./GenCerts.sh "+input_folder+m+" "+output_folder)
                         d.gauge_update(100, "Done")
                         time.sleep(1)
                         d.gauge_stop
