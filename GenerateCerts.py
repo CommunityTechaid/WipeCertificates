@@ -7,7 +7,7 @@ import os.path
 from dialog import Dialog
 
 log_file_prefix = "nwipe_log_"
-output_folder = "/home/CTA/WipeCertificates/"
+output_folder = "/home/cta/WipeCertificates/"
 input_folder = "/srv/netboot/log/shredos/"
 
 locale.setlocale(locale.LC_ALL, '')
