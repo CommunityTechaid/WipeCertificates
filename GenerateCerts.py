@@ -34,9 +34,8 @@ def device_id_from_filename(filename):
             return device_id
 
 
-
-
-d = Dialog(dialog="dialog", DIALOGRC="./CTA.rc")
+# d = Dialog(dialog="dialog", DIALOGRC="./CTA.rc")
+d = Dialog(dialog="dialog")
 # Dialog.set_background_title() requires pythondialog 2.13 or later
 d.set_background_title("CTA Disk Wipe Certification")
 
