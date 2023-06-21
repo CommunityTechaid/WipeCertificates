@@ -1,0 +1,8 @@
+[Unit]
+Description=CTA device wipe certificate generating service
+
+[Service]
+ExecStart=inotify -e "create" -m /srv/netboot/log/shredos | while read dir action file; do echo $dir $action $file; BashGenCerts.sh $file /srv/netboot/log/shredos/certs; done
+
+[Install]
+WantedBy=multi-user.target
