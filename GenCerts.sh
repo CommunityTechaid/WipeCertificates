@@ -23,7 +23,7 @@ parseLog() {
         outputFilesLocation="$outputFilesLocation"/
     fi
 
-    deviceID=$(grep -Po '(?<=_)([[:digit:]]{4})(?=_)' <<< "$fileName")
+    deviceID=$(grep -Po '(?<=_)([[:digit:]]{4,})(?=_)' <<< "$fileName")
 
     # head to only get first if multiple disks present
     wipeStart=$(grep "Starting round 1 of 1" "$fileName" | head -n 1 | cut -d \] -f 1 | tr -d \[)

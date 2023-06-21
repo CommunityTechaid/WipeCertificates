@@ -7,7 +7,7 @@ import os.path
 from dialog import Dialog
 
 log_file_prefix = "nwipe_log_"
-input_folder = "/srv/netboot/log/shredos/"
+input_folder = "./"
 output_folder = os.environ['HOME']
 output_prefix = "CTAWipeReport-"
 
