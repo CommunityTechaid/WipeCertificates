@@ -1,21 +1,21 @@
-README
+# README
 
 Script(s) to (auto)generate CTA Disk Wipe Certificates
 
-# Requirements
-## For the Python wrapper
+## Requirements
+### For the Python wrapper
 dialog
 pythondialog
 
-## For the core Bash script
+### For the core Bash script
 pandoc
 texlive-latex-recommended
 texlive-latex-extra
 
-## For the systemd service
+### For the systemd service
 inotify-tools
 
-# Files
+## Files
 `CTA.tex` - A .tex file specify the certificates formatting
 `CTALogo.png` - A resource for the final PDFs.
 `Certs.service` - Systemd service file to watch a folder for new logfiles and then automatically run `BashGenCerts.sh` on them
@@ -25,21 +25,21 @@ inotify-tools
 `example.pdf` - example output PDF of a certificate
 `example_log_1234_20231231-121212.txt` - example input logfile
 
-# Usage
-## BashGenCerts.sh
+## Usage
+### BashGenCerts.sh
 `BashGenCerts.sh example_log_1234_20231231-121212.txt ./certs`
 
-## CTASecureWipeCerts.py
+### CTASecureWipeCerts.py
 `CTASecureWipeCerts.py`
 
-# Installation
-## Scripts
+## Installation
+### Scripts
 ```bash
 sudo cp ./BashGenCerts.sh /usr/local/bin/BashGenCerts.sh
 sudo cp ./CTASecureWipeCerts.py /usr/local/bin/CTASecureWipeCerts
 ```
 
-## Service
+### Service
 ```bash
 sudo cp ./Certs.service /etc/systemd/system/Certs.service
 sudo systemctl daemon-reload
