@@ -84,3 +84,13 @@ addgroup guest netboot-log
 sudo systemctl start smbd
 sudo systemctl enable smbd
 ```
+
+### Viewing in Windows
+
+To view share in Windows:
+- Open File Explorer
+- Type in `\\Theta\cert_share`
+
+To pin location:
+- Click Home
+- Click Pin to Quick Access
