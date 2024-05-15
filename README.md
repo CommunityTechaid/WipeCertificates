@@ -63,8 +63,7 @@ Copy .service file to system folder, reload services and then start and enable t
 ```bash
 sudo cp ./Certs.service /etc/systemd/system/Certs.service
 sudo systemctl daemon-reload
-sudo systemctl start Certs.service
-sudo systemctl enable Certs.service
+sudo systemctl enable --now Certs.service
 ```
 
 ## Samba share
@@ -86,8 +85,7 @@ useradd guest -s /bin/nologin
 addgroup guest netboot-log
 
 # start / enable smbd.service
-sudo systemctl start smbd
-sudo systemctl enable smbd
+sudo systemctl enable --now smbd
 ```
 
 ### Viewing in Windows
