@@ -147,7 +147,7 @@ parseLog() {
 "$errorTable" \
 "$cert" 
 
-pandoc -f markdown -H CTA.tex -s -o "$outputFilesLocation"CTAWipeReport-"$deviceID".pdf <<< "$report"
+pandoc -f markdown -H /usr/share/CTA.tex -s -o "$outputFilesLocation"CTAWipeReport-"$deviceID".pdf <<< "$report"
 }
 
 parseLog "$1" "$2"
