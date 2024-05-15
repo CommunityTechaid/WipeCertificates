@@ -52,6 +52,11 @@ Copy files to /usr/local/bin/
 sudo cp ./BashGenCerts.sh /usr/local/bin/BashGenCerts.sh
 sudo cp ./CTASecureWipeCerts.py /usr/local/bin/CTASecureWipeCerts
 ```
+Copy resources to /usr/share/
+```bash
+sudo cp ./CTA.tex /usr/share/
+sudo cp ./CTALogo.png /usr/share/
+```
 
 ### Service
 Copy .service file to system folder, reload services and then start and enable the service.
